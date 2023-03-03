@@ -1,0 +1,15 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "node-schedule": "^2.1.1",
+    "request": "^2.88.2",
+    "superagent": "^8.0.9",
+    "superagent-charset": "^1.2.0"
+  }
+}
