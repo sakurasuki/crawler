@@ -30,7 +30,7 @@ const loadPage = () => {
 
 //保存图片
 const saveImage = (url, fileName) => {
-  const path = '../image/'
+  const path = '../../images/'
   https.get(url, (req, res) => {
     var imgData = ''
     req.on('data', chunk => {
