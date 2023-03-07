@@ -2,6 +2,7 @@ const request = require('request')
 const https = require('https')
 const cheerio = require('cheerio')
 const fs = require('fs')
+const schedule = require('node-schedule')
 const moment = require('moment')
 const domain = 'https://github.com/'
 const userId = 'sakurasuki'
@@ -9,7 +10,7 @@ const userId = 'sakurasuki'
 const genLogData = msg => `[${moment(new Date().getTime()).format('YYYY-MM-DD HH:mm:ss')}] ------ ${msg}\n`
 const writeLog = msg => {
   //创建可写流
-  const log = fs.createWriteStream(`../logs/${moment(new Date().getTime()).format('YYYY/MM/DD')}.txt`, { flags: 'a' })
+  const log = fs.createWriteStream(`../logs/${moment(new Date().getTime()).format('YYYY-MM-DD')}.txt`, { flags: 'a' })
   //写入数据到流
   log.write(genLogData(msg))
   //关闭写入流，表明已没有数据要被写入可写流
@@ -55,10 +56,11 @@ const saveImage = (url, fileName) => {
 
 //定时器规则
 let rule = new schedule.RecurrenceRule()
-
-rule.hour = Array.from({ length: 24 }, (_, i) => 1 + i) // 每小时执行一次
+const hour = Array.from({ length: 24 }, (_, i) => 1 + i)// 每小时执行一次
+rule.hour =  hour
 //   rule.minute = [53, 54, 55]//分钟
-//rule.second = [30, 60] //秒
+rule.second = [] //秒
+//console.log(rule)
 //启动任务
 const job = schedule.scheduleJob(rule, () => {
   writeLog('定时任务启动')
